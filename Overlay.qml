@@ -134,16 +134,19 @@ Item {
   function confirm() {
     var toplevel = root.targetToplevel
     var address = root.targetAddress
-    root.dismiss()
     // Re-check right before closing: the exact window asked about must still
     // exist, and still carry the address that was shown.
-    if (address === "" || !toplevel || !root.stillOpen(toplevel)
-        || root.safeAddress(toplevel.address) !== address) return
-    // Under Hyprland's Lua config a dispatch is a Lua expression, so only a
-    // shape-checked hex address is ever interpolated into it.
-    Hyprland.dispatch(Hyprland.usingLua
-      ? "hl.dsp.window.close({ window = \"address:" + address + "\" })"
-      : "closewindow address:" + address)
+    if (address !== "" && toplevel && root.stillOpen(toplevel)
+        && root.safeAddress(toplevel.address) === address) {
+      // Under Hyprland's Lua config a dispatch is a Lua expression, so only a
+      // shape-checked hex address is ever interpolated into it.
+      Hyprland.dispatch(Hyprland.usingLua
+        ? "hl.dsp.window.close({ window = \"address:" + address + "\" })"
+        : "closewindow address:" + address)
+    }
+    // Last: hiding makes the host unload this component, so nothing of it may
+    // run after this line.
+    root.dismiss()
   }
 
   function choose(index) {
