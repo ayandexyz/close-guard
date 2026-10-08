@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.ayandexyz.close-guard",
+  "name": "Close Guard",
+  "version": "0.1.0",
+  "author": "Ayan De",
+  "license": "MIT",
+  "description": "Asks \"Are you sure you want to close?\" before Super+W closes a window. No is selected by default.",
+  "kinds": [
+    "overlay",
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "overlay": "Overlay.qml",
+    "barWidget": "BarWidget.qml"
+  },
+  "homepage": "https://github.com/ayandexyz/close-guard",
+  "barWidget": {
+    "displayName": "Close Guard",
+    "description": "Pick which apps ask \"Are you sure you want to close?\" before Super+W closes them.",
+    "category": "System",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}
